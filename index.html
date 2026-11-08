@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#7b5d39" />
+  <title>Komma-Detektive im Herbst</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="autumn-bg" aria-hidden="true">
+    <span>🍁</span><span>🍂</span><span>🍃</span><span>🍁</span><span>🍂</span>
+  </div>
+
+  <header class="topbar">
+    <button class="brand" id="homeBtn" type="button" aria-label="Zur Startseite">
+      <span class="brand-mark">🍁</span>
+      <span>
+        <strong>Komma-Detektive</strong>
+        <small>Herbsttraining · Klasse 6/7</small>
+      </span>
+    </button>
+    <div class="top-actions">
+      <button class="icon-btn" id="soundBtn" type="button" aria-pressed="true" title="Ton an/aus">🔊</button>
+      <button class="icon-btn" id="resetBtn" type="button" title="Gespeicherte Ergebnisse löschen">↺</button>
+    </div>
+  </header>
+
+  <main id="app" class="app-shell" aria-live="polite"></main>
+
+  <template id="homeTemplate">
+    <section class="hero card">
+      <div>
+        <p class="eyebrow">Klick statt Schreiben</p>
+        <h1>Wo gehört das Komma hin?</h1>
+        <p class="lead">Klicke immer auf das <strong>Wort, nach dem das Komma stehen muss</strong>. Im Fehlerdetektiv markierst du zusätzlich das falsche Wort.</p>
+      </div>
+      <div class="hero-icon" aria-hidden="true">🕵️‍♀️🍂</div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">4 Gruppen · je 10 Sätze</p>
+          <h2>Wähle ein Training</h2>
+        </div>
+        <button class="primary compact" id="allBtn" type="button">Alle 40 mischen</button>
+      </div>
+      <div id="groupGrid" class="group-grid"></div>
+    </section>
+
+    <section class="tip card soft">
+      <div class="tip-icon">💡</div>
+      <div>
+        <strong>Merksatz</strong>
+        <p><em>weil, dass, wenn, obwohl, bevor, damit …</em> leiten oft einen Nebensatz ein. Steht der Nebensatz zuerst, kommt das Komma erst <strong>nach dem ganzen Nebensatz</strong>.</p>
+        <p class="tiny"><strong>Extra:</strong> <em>denn</em> verbindet zwei Hauptsätze. Trotzdem steht davor ein Komma.</p>
+      </div>
+    </section>
+  </template>
+
+  <template id="quizTemplate">
+    <section class="quiz-wrap">
+      <div class="quiz-topline">
+        <button class="ghost" id="backBtn" type="button">← Übersicht</button>
+        <span class="pill" id="modePill"></span>
+      </div>
+
+      <div class="progress-card card">
+        <div class="progress-meta">
+          <span id="questionCount"></span>
+          <span id="scoreLive"></span>
+        </div>
+        <div class="progress-track" aria-hidden="true"><div id="progressBar" class="progress-bar"></div></div>
+      </div>
+
+      <section class="question-card card">
+        <p class="eyebrow" id="groupLabel"></p>
+        <h2 id="questionPrompt">Klicke auf das Wort, nach dem das Komma kommt.</h2>
+
+        <div id="toolSwitch" class="tool-switch" hidden>
+          <button class="tool active" data-tool="comma" type="button">✂️ Komma setzen</button>
+          <button class="tool" data-tool="error" type="button">🔎 Fehlerwort markieren</button>
+        </div>
+
+        <div id="sentence" class="sentence" role="group" aria-label="Satz"></div>
+
+        <div id="selectionHint" class="selection-hint"></div>
+        <div id="feedback" class="feedback" hidden></div>
+
+        <div class="question-actions">
+          <button class="secondary" id="clearBtn" type="button">Auswahl löschen</button>
+          <button class="primary" id="checkBtn" type="button">Prüfen</button>
+          <button class="primary" id="nextBtn" type="button" hidden>Weiter →</button>
+        </div>
+      </section>
+    </section>
+  </template>
+
+  <template id="resultTemplate">
+    <section class="result-card card">
+      <div id="resultEmoji" class="result-emoji">🍁</div>
+      <p class="eyebrow">Geschafft!</p>
+      <h1 id="resultTitle"></h1>
+      <div class="score-ring" id="scoreRing">
+        <strong id="resultPercent"></strong>
+        <span>richtig</span>
+      </div>
+      <p id="resultLine" class="lead"></p>
+      <div class="result-actions">
+        <button class="primary" id="retryMistakesBtn" type="button">Nur Fehler üben</button>
+        <button class="secondary" id="replayBtn" type="button">Gruppe nochmal</button>
+        <button class="ghost" id="resultHomeBtn" type="button">Zur Übersicht</button>
+      </div>
+    </section>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
