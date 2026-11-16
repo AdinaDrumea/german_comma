@@ -1,120 +1,136 @@
 <!doctype html>
-<html lang="de">
+<html lang="de-CH">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#7b5d39" />
-  <title>Komma-Detektive im Herbst</title>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#7b5d39">
+<title>Komma-Detektive - Prototyp 3</title>
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="autumn-bg" aria-hidden="true">
-    <span>🍁</span><span>🍂</span><span>🍃</span><span>🍁</span><span>🍂</span>
+<header class="topbar">
+  <button class="brand" id="homeBtn" type="button" aria-label="Zur Startseite"><span class="brandMark">🍁</span><span><strong>Komma-Detektive</strong><small>Schweizer Standarddeutsch · Klasse 6/7</small></span></button>
+  <div class="actions"><button class="icon info" id="infoBtn" type="button" aria-label="Komma-Regeln anzeigen">ⓘ <span class="infoLabel">Regeln</span></button><button class="icon" id="resetBtn" type="button" title="Ergebnisse löschen" aria-label="Ergebnisse löschen">↺</button></div>
+</header>
+<main class="shell" id="app" aria-live="polite"></main>
+
+<div class="overlay" id="infoOverlay" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+<div class="modal">
+  <div class="modalHead"><div><p class="eyebrow">Umfassende Übersicht</p><h2 id="infoTitle">Komma-Regeln zum Nachschauen</h2></div><button class="close" id="closeInfo" type="button" aria-label="Schliessen">×</button></div>
+  <div class="ruleIntro"><strong>Die wichtigste Idee:</strong> Das Komma trennt Satzteile. Signalwörter helfen, aber sie sind nicht die eigentliche Regel. Frage immer: <em>Wo beginnt und wo endet der Nebensatz, die Infinitivgruppe oder der Einschub?</em></div>
+
+  <div class="ruleColumns">
+    <section class="ruleBlock">
+      <h3>1. Komma VOR einem Nebensatz-Einleiter</h3>
+      <p>Steht zuerst der Hauptsatz und danach ein Nebensatz, steht das Komma <strong>vor dem Einleiter des Nebensatzes</strong>.</p>
+      <p class="exampleLine">Wir bleiben hier<span class="key">, weil</span> der Nebel dichter wird.</p>
+      <h4>Häufige und wichtige Subjunktionen</h4>
+      <div class="chips">
+        <span class="chip">als</span><span class="chip">bevor</span><span class="chip">bis</span><span class="chip">da</span><span class="chip">damit</span><span class="chip">dass</span><span class="chip">ehe</span><span class="chip">falls</span><span class="chip">indem</span><span class="chip">nachdem</span><span class="chip">ob</span><span class="chip">obgleich</span><span class="chip">obschon</span><span class="chip">obwohl</span><span class="chip">obzwar</span><span class="chip">seit</span><span class="chip">seitdem</span><span class="chip">sobald</span><span class="chip">sodass / so dass</span><span class="chip">sofern</span><span class="chip">solange</span><span class="chip">sooft</span><span class="chip">während</span><span class="chip">weil</span><span class="chip">wenn</span><span class="chip">wenngleich</span><span class="chip">zumal</span>
+      </div>
+      <h4>Mehrteilige Einleiter</h4>
+      <div class="chips"><span class="chip">als ob</span><span class="chip">als wenn</span><span class="chip">auch wenn</span><span class="chip">selbst wenn</span><span class="chip">ohne dass</span><span class="chip">statt dass</span><span class="chip">anstatt dass</span><span class="chip">ausser dass</span></div>
+      <p class="tiny">Nicht jedes dieser Wörter ist in jedem Satz automatisch ein Nebensatz-Einleiter. Entscheidend ist die Funktion im Satz.</p>
+    </section>
+
+    <section class="ruleBlock">
+      <h3>2. Auch Frage- und Relativwörter können einen Nebensatz starten</h3>
+      <p>Vor indirekten Fragen und Relativsätzen steht ebenfalls ein Komma.</p>
+      <p class="exampleLine">Ich weiss nicht<span class="key">, warum</span> der Weg gesperrt ist.</p>
+      <p class="exampleLine">Der Weg<span class="key">, der</span> durch den Wald führt<span class="key">,</span> ist rutschig.</p>
+      <div class="chips"><span class="chip">wer</span><span class="chip">was</span><span class="chip">wann</span><span class="chip">wo</span><span class="chip">wohin</span><span class="chip">woher</span><span class="chip">warum</span><span class="chip">weshalb</span><span class="chip">weswegen</span><span class="chip">wie</span><span class="chip">welcher / welche / welches</span><span class="chip">der / die / das</span><span class="chip">den / dem / dessen / deren ...</span></div>
+    </section>
+
+    <section class="ruleBlock wide">
+      <h3>3. Komma NACH einem Verweiswort: daran, darüber, dagegen ...</h3>
+      <p>Diese Wörter gehören noch zum übergeordneten Satz. Wenn sie auf den folgenden Nebensatz oder eine Infinitivgruppe vorausweisen, steht das Komma <strong>nach dem Verweiswort bzw. am Ende der ganzen übergeordneten Wendung</strong>.</p>
+      <p class="exampleLine">Ohne zweites Signalwort: Es spricht nichts <span class="key">dagegen,</span> hier zu warten.</p>
+      <p class="exampleLine">Mit zweitem Signalwort: Es spricht nichts <span class="key">dagegen, dass</span> wir hier warten.</p>
+      <table class="afterTable">
+        <thead><tr><th>Verweiswort / Wendung</th><th>Beispiel ohne zweites Signalwort</th></tr></thead>
+        <tbody>
+          <tr><td><strong>daran</strong></td><td>Denk daran, die Karte mitzunehmen.</td></tr>
+          <tr><td><strong>darauf</strong></td><td>Achte darauf, langsam zu gehen.</td></tr>
+          <tr><td><strong>darüber</strong></td><td>Wir sprechen darüber, morgen früher loszugehen.</td></tr>
+          <tr><td><strong>davon</strong></td><td>Sie träumt davon, den Gipfel zu erreichen.</td></tr>
+          <tr><td><strong>davor</strong></td><td>Der Förster warnt davor, den Weg zu verlassen.</td></tr>
+          <tr><td><strong>dafür</strong></td><td>Ich bin dafür, den markierten Weg zu nehmen.</td></tr>
+          <tr><td><strong>dagegen</strong></td><td>Es spricht nichts dagegen, hier zu warten.</td></tr>
+          <tr><td><strong>dazu</strong></td><td>Sie entschliesst sich dazu, früher umzukehren.</td></tr>
+          <tr><td><strong>darin</strong></td><td>Die Aufgabe besteht darin, den sicheren Weg zu finden.</td></tr>
+          <tr><td><strong>dabei</strong></td><td>Er hilft dabei, die Karte richtig zu lesen.</td></tr>
+          <tr><td><strong>damit</strong></td><td>Wir rechnen damit, rechtzeitig anzukommen.</td></tr>
+          <tr><td><strong>darum</strong></td><td>Es geht darum, ruhig zu bleiben.</td></tr>
+          <tr><td><strong>danach</strong></td><td>Sie sehnt sich danach, wieder Sonne zu sehen.</td></tr>
+          <tr><td><strong>darunter</strong></td><td>Er leidet darunter, so lange warten zu müssen.</td></tr>
+          <tr><td><strong>es</strong> als Verweiswort</td><td>Sie liebt es, im Herbst zu wandern.</td></tr>
+          <tr><td><strong>darauf an</strong></td><td>Es kommt darauf an, ruhig zu bleiben.</td></tr>
+          <tr><td><strong>davon ab</strong></td><td>Der Erfolg hängt davon ab, die Karte richtig zu lesen.</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><strong>Wichtig:</strong> Das Wort allein «verlangt» nicht immer ein Komma. Es bekommt diese Funktion, wenn es auf einen folgenden Satzteil verweist. Manchmal steht zwischen Verweiswort und Komma noch ein Teil der Wendung: <em>Es kommt darauf an, ... / Es hängt davon ab, ...</em></div>
+    </section>
+
+    <section class="ruleBlock">
+      <h3>4. Nebensatz zuerst</h3>
+      <p>Steht der Nebensatz am Anfang, kommt das Komma erst <strong>nach dem ganzen Nebensatz</strong>.</p>
+      <p class="exampleLine"><span class="key">Wenn der Nebel dichter wird,</span> kehren wir um.</p>
+      <p>Das Signalwort steht also am Satzanfang - das Komma steht nicht direkt danach.</p>
+    </section>
+
+    <section class="ruleBlock">
+      <h3>5. Eingeschobener Nebensatz / Relativsatz</h3>
+      <p>Steckt ein Nebensatz mitten im Hauptsatz, wird er mit <strong>zwei Kommas</strong> eingerahmt.</p>
+      <p class="exampleLine">Die Vögel<span class="key">, die am See rasten,</span> sammeln Kraft.</p>
+      <p>Probe: Nimm den Einschub heraus. Der Hauptsatz bleibt übrig: <em>Die Vögel sammeln Kraft.</em></p>
+    </section>
+
+    <section class="ruleBlock">
+      <h3>6. Hauptsätze: Komma vor aber, sondern, denn, doch</h3>
+      <p>Werden gleichrangige Satzteile oder Hauptsätze mit einem Gegensatz/Grund verbunden, steht meist ein Komma.</p>
+      <div class="chips"><span class="chip">aber</span><span class="chip">sondern</span><span class="chip">denn</span><span class="chip">doch</span></div>
+      <p class="exampleLine">Wir wollten weitergehen<span class="key">, aber</span> der Weg war gesperrt.</p>
+      <p class="exampleLine">Wir warten hier<span class="key">, denn</span> die Sicht ist schlecht.</p>
+    </section>
+
+    <section class="ruleBlock">
+      <h3>7. Meist KEIN Komma vor und / oder &amp; Co.</h3>
+      <div class="chips"><span class="chip">und</span><span class="chip">oder</span><span class="chip">sowie</span><span class="chip">beziehungsweise / bzw.</span><span class="chip">entweder ... oder</span><span class="chip">weder ... noch</span><span class="chip">sowohl ... als auch</span></div>
+      <p class="exampleLine">Wir nehmen Karte und Kompass mit.</p>
+      <p class="exampleLine">Wir bleiben hier oder wir kehren um.</p>
+      <p class="tiny">Bei zwei vollständigen Hauptsätzen kann ein gliederndes Komma teilweise möglich sein. Im normalen Schultraining wird vor diesen reihenden Konjunktionen meist kein Komma gesetzt. Seit 2024 gibt es zudem eine besondere Pflichtregel, wenn nach einem Satz mit <em>und/oder</em> ein neues Satzgefüge beginnt.</p>
+    </section>
+
+    <section class="ruleBlock wide">
+      <h3>8. Infinitivgruppen mit «zu»</h3>
+      <p>Nach dem aktuellen amtlichen Regelwerk werden <strong>satzwertige Infinitivgruppen</strong> mit Komma abgegrenzt. Besonders leicht erkennst du sie bei diesen Einleitern:</p>
+      <div class="chips"><span class="chip">um ... zu</span><span class="chip">ohne ... zu</span><span class="chip">statt ... zu</span><span class="chip">anstatt ... zu</span><span class="chip">ausser ... zu</span><span class="chip">als ... zu</span></div>
+      <p class="exampleLine">Wir gehen langsam<span class="key">, um</span> nicht auszurutschen.</p>
+      <p class="exampleLine">Sie ging weiter<span class="key">, ohne</span> auf die Karte zu schauen.</p>
+      <p>Auch ohne solchen Einleiter kann eine satzwertige Infinitivgruppe abgetrennt werden: <em>Er versprach, beim Projekt mitzumachen.</em> Ein einfacher, nicht erweiterter Infinitiv kann weiterhin ohne Komma stehen.</p>
+    </section>
+
+    <section class="ruleBlock">
+      <h3>9. Weitere wichtige Kommafälle</h3>
+      <ul>
+        <li><strong>Aufzählungen:</strong> Karte, Kompass, Wasser und Jacke.</li>
+        <li><strong>Anrede:</strong> Mia, komm bitte zurück.</li>
+        <li><strong>Zusatz / Apposition:</strong> Frau Meier, unsere Lehrerin, kommt mit.</li>
+        <li><strong>Nachtrag:</strong> Wir bleiben hier, und zwar bis der Nebel dünner wird.</li>
+      </ul>
+    </section>
+
+    <section class="ruleBlock">
+      <h3>10. «als» und «wie»: manchmal Komma, manchmal nicht</h3>
+      <p><strong>Kein Komma</strong> bei einem einfachen Vergleich: <em>Der Nebel ist dichter als gestern.</em></p>
+      <p><strong>Komma</strong>, wenn ein ganzer Nebensatz folgt: <em>Der Nebel ist dichter, als wir erwartet hatten.</em></p>
+    </section>
   </div>
 
-  <header class="topbar">
-    <button class="brand" id="homeBtn" type="button" aria-label="Zur Startseite">
-      <span class="brand-mark">🍁</span>
-      <span>
-        <strong>Komma-Detektive</strong>
-        <small>Herbsttraining · Klasse 6/7</small>
-      </span>
-    </button>
-    <div class="top-actions">
-      <button class="icon-btn" id="soundBtn" type="button" aria-pressed="true" title="Ton an/aus">🔊</button>
-      <button class="icon-btn" id="resetBtn" type="button" title="Gespeicherte Ergebnisse löschen">↺</button>
-    </div>
-  </header>
+  <div class="note parentNote"><strong>Hinweis für Eltern/Lehrpersonen (Schweiz):</strong> Die Schweiz hat das amtliche Regelwerk 2024 übernommen. Für die Einführung in den Schulen gilt eine Übergangsfrist bis spätestens zum Schuljahr 2027/28. Besonders bei Infinitivgruppen können ältere Lehrmittel deshalb noch anders aussehen. Dieser Prototyp orientiert sich bei neuen Übungen an der aktuellen amtlichen Regelung; Schweizer Schreibungen wie <em>müssen, Kompass, Strasse</em> verwenden kein ß.</div>
+</div>
+</div>
 
-  <main id="app" class="app-shell" aria-live="polite"></main>
-
-  <template id="homeTemplate">
-    <section class="hero card">
-      <div>
-        <p class="eyebrow">Klick statt Schreiben</p>
-        <h1>Wo gehört das Komma hin?</h1>
-        <p class="lead">Klicke immer auf das <strong>Wort, nach dem das Komma stehen muss</strong>. Im Fehlerdetektiv markierst du zusätzlich das falsche Wort.</p>
-      </div>
-      <div class="hero-icon" aria-hidden="true">🕵️‍♀️🍂</div>
-    </section>
-
-    <section>
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">4 Gruppen · je 10 Sätze</p>
-          <h2>Wähle ein Training</h2>
-        </div>
-        <button class="primary compact" id="allBtn" type="button">Alle 40 mischen</button>
-      </div>
-      <div id="groupGrid" class="group-grid"></div>
-    </section>
-
-    <section class="tip card soft">
-      <div class="tip-icon">💡</div>
-      <div>
-        <strong>Merksatz</strong>
-        <p><em>weil, dass, wenn, obwohl, bevor, damit …</em> leiten oft einen Nebensatz ein. Steht der Nebensatz zuerst, kommt das Komma erst <strong>nach dem ganzen Nebensatz</strong>.</p>
-        <p class="tiny"><strong>Extra:</strong> <em>denn</em> verbindet zwei Hauptsätze. Trotzdem steht davor ein Komma.</p>
-      </div>
-    </section>
-  </template>
-
-  <template id="quizTemplate">
-    <section class="quiz-wrap">
-      <div class="quiz-topline">
-        <button class="ghost" id="backBtn" type="button">← Übersicht</button>
-        <span class="pill" id="modePill"></span>
-      </div>
-
-      <div class="progress-card card">
-        <div class="progress-meta">
-          <span id="questionCount"></span>
-          <span id="scoreLive"></span>
-        </div>
-        <div class="progress-track" aria-hidden="true"><div id="progressBar" class="progress-bar"></div></div>
-      </div>
-
-      <section class="question-card card">
-        <p class="eyebrow" id="groupLabel"></p>
-        <h2 id="questionPrompt">Klicke auf das Wort, nach dem das Komma kommt.</h2>
-
-        <div id="toolSwitch" class="tool-switch" hidden>
-          <button class="tool active" data-tool="comma" type="button">✂️ Komma setzen</button>
-          <button class="tool" data-tool="error" type="button">🔎 Fehlerwort markieren</button>
-        </div>
-
-        <div id="sentence" class="sentence" role="group" aria-label="Satz"></div>
-
-        <div id="selectionHint" class="selection-hint"></div>
-        <div id="feedback" class="feedback" hidden></div>
-
-        <div class="question-actions">
-          <button class="secondary" id="clearBtn" type="button">Auswahl löschen</button>
-          <button class="primary" id="checkBtn" type="button">Prüfen</button>
-          <button class="primary" id="nextBtn" type="button" hidden>Weiter →</button>
-        </div>
-      </section>
-    </section>
-  </template>
-
-  <template id="resultTemplate">
-    <section class="result-card card">
-      <div id="resultEmoji" class="result-emoji">🍁</div>
-      <p class="eyebrow">Geschafft!</p>
-      <h1 id="resultTitle"></h1>
-      <div class="score-ring" id="scoreRing">
-        <strong id="resultPercent"></strong>
-        <span>richtig</span>
-      </div>
-      <p id="resultLine" class="lead"></p>
-      <div class="result-actions">
-        <button class="primary" id="retryMistakesBtn" type="button">Nur Fehler üben</button>
-        <button class="secondary" id="replayBtn" type="button">Gruppe nochmal</button>
-        <button class="ghost" id="resultHomeBtn" type="button">Zur Übersicht</button>
-      </div>
-    </section>
-  </template>
-
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
